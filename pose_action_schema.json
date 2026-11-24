@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {"type": "string", "enum": ["pick", "separate", "inspect", "done"]},
+    "arm": {"type": "string", "enum": ["left", "right"]},
+    "u": {"type": "integer"},
+    "v": {"type": "integer"},
+    "angle": {"type": "integer"},
+    "color": {"type": "string", "enum": ["red", "orange", "blue", "green", "any"]},
+    "drop_u": {"type": ["integer", "null"]},
+    "drop_v": {"type": ["integer", "null"]},
+    "grasp_height_mm": {"type": ["integer", "null"]}
+  },
+  "required": ["kind", "arm", "u", "v", "angle", "color", "drop_u", "drop_v", "grasp_height_mm"],
+  "additionalProperties": false
+}

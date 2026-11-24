@@ -1,0 +1,492 @@
+{
+  "score": 10,
+  "max_score": 10,
+  "success": true,
+  "counts_in_bin": {
+    "red": 2,
+    "orange": 3
+  },
+  "checkpoints": {
+    "red": {
+      "picked": 2,
+      "placed": 2
+    },
+    "orange": {
+      "picked": 3,
+      "placed": 3
+    }
+  },
+  "actions": [
+    {
+      "arm": "left",
+      "pixel": [
+        189,
+        236
+      ],
+      "angle": 27,
+      "kind": "pick",
+      "lifted": [
+        "orange"
+      ],
+      "entered_bin": [
+        "orange"
+      ],
+      "release_gap_mm": -0.09218998417659385,
+      "separated": false,
+      "shifted_neighbors": 0,
+      "error": null,
+      "force": {
+        "peak_finger_n": [
+          2.51,
+          2.51
+        ],
+        "peak_unexpected_n": 0.0,
+        "support_before_release_n": 0.409,
+        "events": []
+      }
+    },
+    {
+      "arm": "right",
+      "pixel": [
+        580,
+        378
+      ],
+      "angle": 54,
+      "kind": "pick",
+      "lifted": [
+        "orange"
+      ],
+      "entered_bin": [
+        "orange"
+      ],
+      "release_gap_mm": -0.09269705086839553,
+      "separated": false,
+      "shifted_neighbors": 0,
+      "error": null,
+      "force": {
+        "peak_finger_n": [
+          2.53,
+          2.69
+        ],
+        "peak_unexpected_n": 0.0,
+        "support_before_release_n": 0.864,
+        "events": []
+      }
+    },
+    {
+      "arm": "right",
+      "pixel": [
+        446,
+        313
+      ],
+      "angle": 72,
+      "kind": "pick",
+      "lifted": [
+        "orange"
+      ],
+      "entered_bin": [
+        "orange"
+      ],
+      "release_gap_mm": -0.08604371293485791,
+      "separated": false,
+      "shifted_neighbors": 0,
+      "error": null,
+      "force": {
+        "peak_finger_n": [
+          2.69,
+          2.54
+        ],
+        "peak_unexpected_n": 0.0,
+        "support_before_release_n": 0.412,
+        "events": []
+      }
+    },
+    {
+      "arm": "left",
+      "pixel": [
+        288,
+        240
+      ],
+      "angle": 36,
+      "kind": "pick",
+      "lifted": [
+        "red"
+      ],
+      "entered_bin": [
+        "red"
+      ],
+      "release_gap_mm": -0.10118706988343495,
+      "separated": false,
+      "shifted_neighbors": 0,
+      "error": null,
+      "force": {
+        "peak_finger_n": [
+          2.53,
+          2.54
+        ],
+        "peak_unexpected_n": 0.0,
+        "support_before_release_n": 0.425,
+        "events": []
+      }
+    },
+    {
+      "arm": "left",
+      "pixel": [
+        345,
+        271
+      ],
+      "angle": 14,
+      "kind": "separate",
+      "lifted": [
+        "blue"
+      ],
+      "entered_bin": [],
+      "release_gap_mm": -0.07779308243693883,
+      "separated": true,
+      "shifted_neighbors": 0,
+      "error": null,
+      "drop_pixel": [
+        190,
+        145
+      ],
+      "drop_error_mm": 0.4,
+      "force": {
+        "peak_finger_n": [
+          2.5,
+          2.5
+        ],
+        "peak_unexpected_n": 0.0,
+        "support_before_release_n": 0.351,
+        "events": []
+      }
+    },
+    {
+      "arm": "left",
+      "pixel": [
+        350,
+        280
+      ],
+      "angle": 9,
+      "kind": "pick",
+      "lifted": [
+        "red"
+      ],
+      "entered_bin": [
+        "red"
+      ],
+      "release_gap_mm": -0.0973498887552049,
+      "separated": false,
+      "shifted_neighbors": 0,
+      "error": null,
+      "force": {
+        "peak_finger_n": [
+          2.55,
+          2.5
+        ],
+        "peak_unexpected_n": 0.0,
+        "support_before_release_n": 0.418,
+        "events": []
+      }
+    }
+  ],
+  "scene": "clutter",
+  "force_feedback": true,
+  "bin_xy_m": [
+    0.5963313769064293,
+    -0.0614036110254049
+  ],
+  "bin_yaw_deg": -28.558285234087904,
+  "pose_policy": "predicted",
+  "pose_records": [
+    {
+      "observation": 0,
+      "kind": "pick",
+      "color": "orange",
+      "stage": "grasp",
+      "prediction_xyz_m": [
+        0.38317742870270305,
+        -0.14086094994796103,
+        0.332
+      ],
+      "prediction_yaw_deg": 27,
+      "reference_xyz_m": [
+        0.3824929961273196,
+        -0.14193973044374641,
+        0.3318922419236294
+      ],
+      "reference_yaw_deg": 27.80389538524075,
+      "commanded_xyz_m": [
+        0.38317742870270305,
+        -0.14086094994796103,
+        0.332
+      ],
+      "commanded_yaw_deg": 27.0,
+      "achieved_xyz_m": [
+        0.38210837256169167,
+        -0.14123541295188086,
+        0.3312807294786203
+      ],
+      "achieved_yaw_deg": 27.010685605268623,
+      "lifted": true,
+      "placed": true,
+      "error": null
+    },
+    {
+      "observation": 1,
+      "kind": "pick",
+      "color": "orange",
+      "stage": "grasp",
+      "prediction_xyz_m": [
+        0.48601678547704996,
+        0.14230939159267014,
+        0.332
+      ],
+      "prediction_yaw_deg": 54,
+      "reference_xyz_m": [
+        0.48609621150851295,
+        0.1429748258528664,
+        0.33189224457978383
+      ],
+      "reference_yaw_deg": 53.60522956438397,
+      "commanded_xyz_m": [
+        0.48601678547704996,
+        0.14230939159267014,
+        0.332
+      ],
+      "commanded_yaw_deg": 54.0,
+      "achieved_xyz_m": [
+        0.4850047567936498,
+        0.1424295805825976,
+        0.33128860344774447
+      ],
+      "achieved_yaw_deg": 53.968614772186555,
+      "lifted": true,
+      "placed": true,
+      "error": null
+    },
+    {
+      "observation": 2,
+      "kind": "pick",
+      "color": "orange",
+      "stage": "grasp",
+      "prediction_xyz_m": [
+        0.43894243202400385,
+        0.045263801397159714,
+        0.332
+      ],
+      "prediction_yaw_deg": 72,
+      "reference_xyz_m": [
+        0.4387165412545502,
+        0.04539179084742533,
+        0.33189224457978383
+      ],
+      "reference_yaw_deg": 71.84108032413815,
+      "commanded_xyz_m": [
+        0.43894243202400385,
+        0.045263801397159714,
+        0.332
+      ],
+      "commanded_yaw_deg": -108.0,
+      "achieved_xyz_m": [
+        0.4379635776187341,
+        0.04587655423967372,
+        0.33104708959222584
+      ],
+      "achieved_yaw_deg": -107.98679084861008,
+      "lifted": true,
+      "placed": true,
+      "error": null
+    },
+    {
+      "observation": 3,
+      "kind": "pick",
+      "color": "red",
+      "stage": "grasp",
+      "prediction_xyz_m": [
+        0.3860743119921213,
+        -0.06916308853486004,
+        0.332
+      ],
+      "prediction_yaw_deg": 36,
+      "reference_xyz_m": [
+        0.38559705616083917,
+        -0.06882780030572654,
+        0.3318922445797839
+      ],
+      "reference_yaw_deg": 35.65285493906158,
+      "commanded_xyz_m": [
+        0.3860743119921213,
+        -0.06916308853486004,
+        0.332
+      ],
+      "commanded_yaw_deg": 36.0,
+      "achieved_xyz_m": [
+        0.38509890093144583,
+        -0.0696508541058742,
+        0.33129189012786375
+      ],
+      "achieved_yaw_deg": 36.021597818734435,
+      "lifted": true,
+      "placed": true,
+      "error": null
+    },
+    {
+      "observation": 4,
+      "kind": "separate",
+      "color": "blue",
+      "stage": "grasp",
+      "prediction_xyz_m": [
+        0.41106403359747445,
+        -0.027013641835530972,
+        0.354
+      ],
+      "prediction_yaw_deg": 14,
+      "reference_xyz_m": [
+        0.4101869693034533,
+        -0.02791131819858313,
+        0.3536484786084573
+      ],
+      "reference_yaw_deg": 13.02133119709748,
+      "commanded_xyz_m": [
+        0.41106403359747445,
+        -0.027013641835530972,
+        0.354
+      ],
+      "commanded_yaw_deg": 14.0,
+      "achieved_xyz_m": [
+        0.41016350489804027,
+        -0.02750827110474253,
+        0.35322502496893105
+      ],
+      "achieved_yaw_deg": 14.019661077532316,
+      "lifted": true,
+      "placed": false,
+      "error": null
+    },
+    {
+      "observation": 5,
+      "kind": "pick",
+      "color": "red",
+      "stage": "grasp",
+      "prediction_xyz_m": [
+        0.4150431448863035,
+        -0.024261397548877607,
+        0.332
+      ],
+      "prediction_yaw_deg": 9,
+      "reference_xyz_m": [
+        0.41474865916834025,
+        -0.025056698352946265,
+        0.3318922445797838
+      ],
+      "reference_yaw_deg": 8.8732746936774,
+      "commanded_xyz_m": [
+        0.4150431448863035,
+        -0.024261397548877607,
+        0.332
+      ],
+      "commanded_yaw_deg": 9.0,
+      "achieved_xyz_m": [
+        0.41410544722111275,
+        -0.024749744099767938,
+        0.3312374549962799
+      ],
+      "achieved_yaw_deg": 9.025594815400186,
+      "lifted": true,
+      "placed": true,
+      "error": null
+    }
+  ],
+  "seed": 605241657,
+  "termination": "goal_reached",
+  "agent_actions": [
+    {
+      "kind": "pick",
+      "arm": "left",
+      "u": 189,
+      "v": 236,
+      "angle": 27,
+      "color": "orange",
+      "drop_u": null,
+      "drop_v": null,
+      "grasp_height_mm": 12,
+      "observation": 0
+    },
+    {
+      "kind": "pick",
+      "arm": "right",
+      "u": 580,
+      "v": 378,
+      "angle": 54,
+      "color": "orange",
+      "drop_u": null,
+      "drop_v": null,
+      "grasp_height_mm": 12,
+      "observation": 1
+    },
+    {
+      "kind": "pick",
+      "arm": "right",
+      "u": 446,
+      "v": 313,
+      "angle": 72,
+      "color": "orange",
+      "drop_u": null,
+      "drop_v": null,
+      "grasp_height_mm": 12,
+      "observation": 2
+    },
+    {
+      "kind": "pick",
+      "arm": "left",
+      "u": 288,
+      "v": 240,
+      "angle": 36,
+      "color": "red",
+      "drop_u": null,
+      "drop_v": null,
+      "grasp_height_mm": 12,
+      "observation": 3
+    },
+    {
+      "kind": "separate",
+      "arm": "left",
+      "u": 345,
+      "v": 271,
+      "angle": 14,
+      "color": "blue",
+      "drop_u": 190,
+      "drop_v": 145,
+      "grasp_height_mm": 34,
+      "observation": 4
+    },
+    {
+      "kind": "pick",
+      "arm": "left",
+      "u": 350,
+      "v": 280,
+      "angle": 9,
+      "color": "red",
+      "drop_u": null,
+      "drop_v": null,
+      "grasp_height_mm": 12,
+      "observation": 5
+    },
+    {
+      "done": true
+    }
+  ],
+  "elapsed_seconds": 234.89,
+  "model": "gpt-6.2-sol",
+  "reasoning_effort": "high",
+  "model_calls": 6,
+  "model_seconds": 156.45,
+  "model_waits": [
+    26.64,
+    28.47,
+    25.88,
+    28.77,
+    24.69,
+    22.0
+  ]
+}

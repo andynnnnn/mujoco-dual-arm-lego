@@ -42,4 +42,3 @@ python run_pose_comparison.py pose_ab_run 52 1498465241 3550491209 4162747307
 ```
 
 A/B 每对共享初始画面和第一次决策，随后独立闭环，结果写入 `results/pose_ab_run/comparison.json`。
-

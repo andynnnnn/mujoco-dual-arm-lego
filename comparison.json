@@ -1,0 +1,418 @@
+{
+  "model": "gpt-6.2-sol",
+  "reasoning_effort": "high",
+  "seeds": [
+    52,
+    1498465241,
+    3550491209,
+    4162747307
+  ],
+  "force_feedback": true,
+  "shared_first_decision": true,
+  "groups": {
+    "corrected": {
+      "trials": [
+        {
+          "seed": 52,
+          "score": 10,
+          "success": true,
+          "first_pick_lifted": true,
+          "pick_attempts": 5,
+          "target_lifts": 5,
+          "force_stops": 0,
+          "force_events": [],
+          "termination": "goal_reached",
+          "elapsed_seconds": 137.8,
+          "model_calls": 6,
+          "predicted_pose_errors": [
+            {
+              "xy_mm": 0.9099050405819226,
+              "z_mm": 0.10775807637058987,
+              "yaw_deg": 0.27351558053389624
+            },
+            {
+              "xy_mm": 0.25843370233787144,
+              "z_mm": 0.1077554202164599,
+              "yaw_deg": 0.11237638484497836
+            },
+            {
+              "xy_mm": 0.2160060320451001,
+              "z_mm": 0.10775542021612683,
+              "yaw_deg": 0.010394849542009865
+            },
+            {
+              "xy_mm": 0.32129351065173234,
+              "z_mm": 0.10775542021640439,
+              "yaw_deg": 0.4039952104658511
+            },
+            {
+              "xy_mm": 0.5947735272755634,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 0.09813552142711046
+            }
+          ]
+        },
+        {
+          "seed": 1498465241,
+          "score": 10,
+          "success": true,
+          "first_pick_lifted": true,
+          "pick_attempts": 6,
+          "target_lifts": 5,
+          "force_stops": 1,
+          "force_events": [
+            {
+              "code": "neighbor_contact",
+              "phase": "approach",
+              "force_n": 4.04,
+              "geom": "brick_01_base"
+            }
+          ],
+          "termination": "goal_reached",
+          "elapsed_seconds": 162.69,
+          "model_calls": 7,
+          "predicted_pose_errors": [
+            {
+              "xy_mm": 0.37842537502260865,
+              "z_mm": 0.10775807637058987,
+              "yaw_deg": 0.5667510506324334
+            },
+            {
+              "xy_mm": 1.0348015201859084,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 1.243093515645171
+            },
+            {
+              "xy_mm": 0.9044745179348812,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.8291332441254156
+            },
+            {
+              "xy_mm": 1.3056210126935033,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 0.3286646258377459
+            },
+            {
+              "xy_mm": 1.2993199759280425,
+              "z_mm": 0.10775542021612683,
+              "yaw_deg": 0.18824890685208118
+            },
+            {
+              "xy_mm": 0.9861401376999167,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 0.5781972972220046
+            }
+          ]
+        },
+        {
+          "seed": 3550491209,
+          "score": 10,
+          "success": true,
+          "first_pick_lifted": true,
+          "pick_attempts": 5,
+          "target_lifts": 5,
+          "force_stops": 0,
+          "force_events": [],
+          "termination": "goal_reached",
+          "elapsed_seconds": 163.78,
+          "model_calls": 6,
+          "predicted_pose_errors": [
+            {
+              "xy_mm": 0.8950224340319503,
+              "z_mm": 0.10775807637058987,
+              "yaw_deg": 1.6081438948343703
+            },
+            {
+              "xy_mm": 1.2090172823117455,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.8117347417282588
+            },
+            {
+              "xy_mm": 0.7102381264257034,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.47851485118602
+            },
+            {
+              "xy_mm": 1.3360774641768014,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 0.9383296864778714
+            },
+            {
+              "xy_mm": 0.947647780089208,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.4069517356547294
+            }
+          ]
+        },
+        {
+          "seed": 4162747307,
+          "score": 10,
+          "success": true,
+          "first_pick_lifted": true,
+          "pick_attempts": 6,
+          "target_lifts": 5,
+          "force_stops": 1,
+          "force_events": [
+            {
+              "code": "neighbor_contact",
+              "phase": "approach",
+              "force_n": 1.89,
+              "geom": "brick_08_base"
+            }
+          ],
+          "termination": "goal_reached",
+          "elapsed_seconds": 169.7,
+          "model_calls": 7,
+          "predicted_pose_errors": [
+            {
+              "xy_mm": 1.1066471981442723,
+              "z_mm": 0.10775807637058987,
+              "yaw_deg": 0.8666763642101785
+            },
+            {
+              "xy_mm": 0.6706007004106974,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 1.1786516608313917
+            },
+            {
+              "xy_mm": 1.408089548275871,
+              "z_mm": 0.10775542021612683,
+              "yaw_deg": 0.29093184722043475
+            },
+            {
+              "xy_mm": 1.0175259606671445,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.44864132769886567
+            },
+            {
+              "xy_mm": 0.8071640531728859,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.6442697409547975
+            },
+            {
+              "xy_mm": 1.0175259620064712,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.44864132769886567
+            }
+          ]
+        }
+      ],
+      "mean_score": 10.0,
+      "successes": 4,
+      "first_pick_successes": 4,
+      "target_lifts": 20,
+      "pick_attempts": 22,
+      "force_stops": 2,
+      "median_prediction_error": {
+        "xy_mm": 0.93,
+        "z_mm": 0.11,
+        "yaw_deg": 0.46
+      }
+    },
+    "predicted": {
+      "trials": [
+        {
+          "seed": 52,
+          "score": 10,
+          "success": true,
+          "first_pick_lifted": true,
+          "pick_attempts": 5,
+          "target_lifts": 5,
+          "force_stops": 0,
+          "force_events": [],
+          "termination": "goal_reached",
+          "elapsed_seconds": 138.81,
+          "model_calls": 6,
+          "predicted_pose_errors": [
+            {
+              "xy_mm": 0.9099050405819226,
+              "z_mm": 0.10775807637058987,
+              "yaw_deg": 0.27351558053389624
+            },
+            {
+              "xy_mm": 0.7117351605862284,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 0.11237638484497836
+            },
+            {
+              "xy_mm": 1.0549780544657135,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.9506087879213112
+            },
+            {
+              "xy_mm": 0.7638152508425814,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 1.403995210465851
+            },
+            {
+              "xy_mm": 1.1606602066536384,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.08601717525930042
+            }
+          ]
+        },
+        {
+          "seed": 1498465241,
+          "score": 10,
+          "success": true,
+          "first_pick_lifted": true,
+          "pick_attempts": 6,
+          "target_lifts": 5,
+          "force_stops": 1,
+          "force_events": [
+            {
+              "code": "neighbor_contact",
+              "phase": "approach",
+              "force_n": 4.3,
+              "geom": "brick_01_base"
+            }
+          ],
+          "termination": "goal_reached",
+          "elapsed_seconds": 188.2,
+          "model_calls": 7,
+          "predicted_pose_errors": [
+            {
+              "xy_mm": 0.37842537502260865,
+              "z_mm": 0.10775807637058987,
+              "yaw_deg": 0.5667510506324334
+            },
+            {
+              "xy_mm": 0.28525871747888754,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 0.24309351564519943
+            },
+            {
+              "xy_mm": 0.3285257752844047,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.8291332441254156
+            },
+            {
+              "xy_mm": 1.3721059661477575,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.3286646258377459
+            },
+            {
+              "xy_mm": 1.9210960033779152,
+              "z_mm": 0.10775542021612683,
+              "yaw_deg": 0.18824890685208118
+            },
+            {
+              "xy_mm": 1.5911326543825846,
+              "z_mm": 0.10775542021612683,
+              "yaw_deg": 0.35741917908841003
+            }
+          ]
+        },
+        {
+          "seed": 3550491209,
+          "score": 10,
+          "success": true,
+          "first_pick_lifted": true,
+          "pick_attempts": 5,
+          "target_lifts": 5,
+          "force_stops": 0,
+          "force_events": [],
+          "termination": "goal_reached",
+          "elapsed_seconds": 171.23,
+          "model_calls": 6,
+          "predicted_pose_errors": [
+            {
+              "xy_mm": 0.8950224340319503,
+              "z_mm": 0.10775807637058987,
+              "yaw_deg": 1.6081438948343703
+            },
+            {
+              "xy_mm": 0.6597518235087693,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.8117347417282588
+            },
+            {
+              "xy_mm": 0.7102381264306915,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.47851485118602
+            },
+            {
+              "xy_mm": 0.9412970985865371,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.9383296864778714
+            },
+            {
+              "xy_mm": 0.346898373029991,
+              "z_mm": 0.10775542021612683,
+              "yaw_deg": 1.2330798271938477
+            }
+          ]
+        },
+        {
+          "seed": 4162747307,
+          "score": 10,
+          "success": true,
+          "first_pick_lifted": true,
+          "pick_attempts": 6,
+          "target_lifts": 5,
+          "force_stops": 1,
+          "force_events": [
+            {
+              "code": "neighbor_contact",
+              "phase": "approach",
+              "force_n": 1.85,
+              "geom": "brick_08_base"
+            }
+          ],
+          "termination": "goal_reached",
+          "elapsed_seconds": 196.39,
+          "model_calls": 7,
+          "predicted_pose_errors": [
+            {
+              "xy_mm": 1.1066471981442723,
+              "z_mm": 0.10775807637058987,
+              "yaw_deg": 0.8666763642101785
+            },
+            {
+              "xy_mm": 0.94128884281029,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.8213483391686083
+            },
+            {
+              "xy_mm": 1.40808954828619,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 0.29093184722043475
+            },
+            {
+              "xy_mm": 1.0175259606838776,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.44864132769886567
+            },
+            {
+              "xy_mm": 1.0817538163342675,
+              "z_mm": 0.10775542021623785,
+              "yaw_deg": 0.25184529653557775
+            },
+            {
+              "xy_mm": 1.0175259619903434,
+              "z_mm": 0.10775542021618234,
+              "yaw_deg": 0.5513586723011343
+            }
+          ]
+        }
+      ],
+      "mean_score": 10.0,
+      "successes": 4,
+      "first_pick_successes": 4,
+      "target_lifts": 20,
+      "pick_attempts": 22,
+      "force_stops": 2,
+      "median_prediction_error": {
+        "xy_mm": 0.94,
+        "z_mm": 0.11,
+        "yaw_deg": 0.51
+      }
+    }
+  },
+  "paired_score_delta_b_minus_a": {
+    "52": 0,
+    "1498465241": 0,
+    "3550491209": 0,
+    "4162747307": 0
+  }
+}

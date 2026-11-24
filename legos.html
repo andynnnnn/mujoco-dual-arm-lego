@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>双臂数乐高 · MuJoCo</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #eef4f8; background: #101821; font: 14px system-ui, sans-serif; }
+  main { max-width: 1280px; margin: auto; padding: 22px; }
+  header, nav, .counts { display: flex; align-items: center; gap: 16px; }
+  header { justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; }
+  h1 { font-size: 24px; margin: 0; }
+  h2 { font-size: 15px; margin: 0 0 10px; }
+  p { margin: 5px 0; color: #abbcc8; }
+  a { color: #85e2ce; }
+  button { padding: 7px 12px; border: 1px solid #4c756e; border-radius: 6px;
+    background: #253e4a; color: #a2efdc; font: inherit; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  #new-run { background: #85e2ce; color: #14252b; font-weight: 650; }
+  .layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr); gap: 16px; align-items: start; }
+  .layout.replaying { grid-template-columns: minmax(0, 1fr); }
+  .layout.replaying .live-summary { display: none; }
+  main:has(.layout.replaying) .model-identity { display: none; }
+  section { border: 1px solid #354653; background: #1a2732; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  img, video { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #101821; border-radius: 6px; }
+  [hidden] { display: none; }
+  #replay-button { margin: 10px 0 0; }
+  #replay { aspect-ratio: auto; }
+  #phase { padding: 7px 10px; background: #253e4a; border-radius: 7px; color: #a2efdc; }
+  .score { font-size: 46px; font-weight: 750; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .score span { color: #a2b6c4; font-size: 20px; }
+  .counts { margin-top: 14px; flex-wrap: wrap; }
+  .counts span { border-left: 4px solid; padding-left: 7px; }
+  .counts .red { border-color: #f05462; }
+  .counts .orange { border-color: #ff954b; }
+  .counts .other { border-color: #8499a8; }
+  #result { min-height: 20px; margin-top: 12px; color: #a2efdc; }
+  .force-readout { width: 100%; border-collapse: collapse; text-align: left; font-variant-numeric: tabular-nums; }
+  .force-readout th, .force-readout td { padding: 5px 8px 5px 0; border-bottom: 1px solid #354653; }
+  .force-readout thead th { color: #abbcc8; font-weight: 500; }
+  #force-event { color: #ffc18b; }
+  .model-image { position: relative; }
+  #pose-point { position: absolute; width: 16px; height: 16px; transform: translate(-50%, -50%);
+    border: 2px solid #a2efdc; border-radius: 50%; box-shadow: 0 0 0 1px #101821; pointer-events: none; }
+  #pose-target { margin: 0 0 9px; color: #a2efdc; font-variant-numeric: tabular-nums; }
+  @media (max-width: 720px) { main { padding: 13px; } .layout { grid-template-columns: 1fr; } }
+</style>
+<main>
+  <header>
+    <div><h1>双臂数乐高</h1><p>B 组<span class="model-identity"> · GPT‑6.2 Sol High</span> · 目标 2 红、3 橙</p></div>
+    <nav><span id="phase" role="status">等待开跑</span>
+      <button id="new-run" disabled>再跑一轮</button></nav>
+  </header>
+  <div class="layout">
+    <section>
+      <h2 id="view-title">双臂实时画面</h2>
+      <img id="frame" alt="双臂全景、俯视、左腕和右腕相机画面">
+      <video id="replay" controls playsinline hidden></video>
+      <button id="replay-button" hidden>播放本轮录像</button>
+    </section>
+    <div class="live-summary">
+      <section>
+        <h2 id="score-title">当前得分</h2>
+        <div class="score"><strong id="score">0</strong> <span>/ 10</span></div>
+        <div class="counts">
+          <span class="red">红 <b id="red">0</b> / 2</span>
+          <span class="orange">橙 <b id="orange">0</b> / 3</span>
+          <span class="other">其他 <b id="other">0</b></span>
+        </div>
+        <p id="result" role="status"></p>
+        <p id="model-time" hidden></p>
+      </section>
+      <section id="force-panel" hidden>
+        <h2>指垫法向力</h2>
+        <table class="force-readout">
+          <thead><tr><th scope="col">机械臂</th><th scope="col">左指（N）</th><th scope="col">右指（N）</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">左臂</th><td id="force-left-0">—</td><td id="force-left-1">—</td></tr>
+            <tr><th scope="row">右臂</th><td id="force-right-0">—</td><td id="force-right-1">—</td></tr>
+          </tbody>
+        </table>
+        <p id="force-support" hidden></p>
+        <p id="force-peak" hidden></p>
+        <p id="force-event" hidden></p>
+      </section>
+      <section>
+        <h2>模型观测 · 每次取放后更新</h2>
+        <p id="pose-target" hidden></p>
+        <div class="model-image">
+          <img id="top" alt="桌面和箱内积木的俯视图">
+          <span id="pose-point" aria-hidden="true" hidden></span>
+        </div>
+        <div id="wrist-panel" hidden>
+          <h2 style="margin-top:12px">腕部近看</h2>
+          <img id="wrist-detail" alt="遮挡检查的腕部图像">
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+<script>
+  const token = "__TOKEN__";
+  const labels = {starting: "正在布置场景", deciding: "等待下一步", planning: "模型正在看图选下一步",
+    replanning: "模型根据最新画面重选", approach: "接近积木",
+    inspect: "腕部近看", separate: "移向模型选的空位", lower_table: "下降到空桌面",
+    grasp: "闭合夹爪", lift: "提起积木", carry: "移向箱子", lower: "下降到箱底", release: "松开夹爪",
+    support: "确认积木已被承托", retreat: "受力停止 · 沿来路退开", park: "退回待机位",
+    finished: "实验已结束", error: "实验中断"};
+  const forceEvents = {neighbor_contact: "碰到邻砖", obstacle_contact: "碰到障碍物", grip_loss: "一侧指垫失力",
+    weak_grip: "双指夹持未稳定", no_support: "未确认承托，夹爪保持闭合"};
+  const colors = {red: "红砖", orange: "橙砖", blue: "蓝砖", green: "绿砖"};
+  const show = (id, text) => {
+    const element = document.getElementById(id);
+    if (element.textContent !== String(text)) element.textContent = text;
+  };
+  let lastObservation;
+  let currentRun;
+  let finished = false;
+  let starting = false;
+  let frameUrl;
+  const frame = document.querySelector("#frame");
+  const replay = document.querySelector("#replay");
+  const layout = document.querySelector(".layout");
+  const replayButton = document.querySelector("#replay-button");
+  const newRun = document.querySelector("#new-run");
+  function showPose(state) {
+    const readout = document.querySelector("#pose-target");
+    const marker = document.querySelector("#pose-point");
+    const target = state.pose_policy === "predicted" ? state.pose_target : null;
+    readout.hidden = !target;
+    marker.hidden = !target || target.observation !== state.observation || finished;
+    if (!target) return;
+    const action = target.kind === "separate" ? "移开" : "抓取";
+    const side = target.arm === "left" ? "左臂" : "右臂";
+    const prefix = marker.hidden ? "最近一次模型目标" : "模型目标";
+    show("pose-target", `${prefix} · ${side}${action}${colors[target.color]} · 像素 (${target.u}, ${target.v}) · 高 ${target.grasp_height_mm} mm · 朝向 ${target.angle}°`);
+    if (!marker.hidden) {
+      marker.style.left = `${(target.u + .5) / 768 * 100}%`;
+      marker.style.top = `${(target.v + .5) / 768 * 100}%`;
+    }
+  }
+  function showForce(state) {
+    document.querySelector("#force-panel").hidden = !state.force_feedback;
+    if (!state.force_feedback) return;
+    const reading = state.force_reading || {};
+    const summary = state.force_summary || {};
+    for (const side of ["left", "right"]) {
+      for (const finger of [0, 1]) {
+        const value = reading.finger_n?.[side]?.[finger];
+        show(`force-${side}-${finger}`, Number.isFinite(value) ? value.toFixed(2) : "—");
+      }
+    }
+    const support = document.querySelector("#force-support");
+    support.hidden = !Number.isFinite(reading.support_n);
+    if (!support.hidden) show("force-support", `承托 ${reading.support_n.toFixed(2)} N · 异常接触 ${reading.unexpected_n.toFixed(2)} N`);
+    const peak = document.querySelector("#force-peak");
+    peak.hidden = !Array.isArray(summary.peak_finger_n);
+    if (!peak.hidden) {
+      const confirmed = Number.isFinite(summary.support_before_release_n)
+        ? ` · 松爪前承托 ${summary.support_before_release_n.toFixed(2)} N` : "";
+      show("force-peak", `上一步夹持峰值 ${summary.peak_finger_n.map(n => n.toFixed(2)).join(" / ")} N${confirmed}`);
+    }
+    const event = reading.event || state.last_force_event;
+    document.querySelector("#force-event").hidden = !event;
+    if (event) show("force-event", `最近一次停退 · ${forceEvents[event.code] || event.code} · ${event.force_n.toFixed(2)} N`);
+  }
+  function closeReplay() {
+    replay.pause();
+    replay.hidden = true;
+    frame.hidden = false;
+    layout.classList.remove("replaying");
+    replayButton.textContent = "播放本轮录像";
+  }
+  newRun.addEventListener("click", async () => {
+    if (starting || newRun.disabled) return;
+    starting = newRun.disabled = true;
+    show("phase", labels.starting);
+    try {
+      const response = await fetch("/legos/start", {method: "POST", headers: {"X-Panda-Token": token}});
+      const status = await response.json();
+      if (!response.ok) throw Error(status.error || "页面会话已更新，请刷新后重试。");
+      closeReplay();
+      replay.removeAttribute("src");
+      replay.load();
+    } catch (error) {
+      show("result", error.message);
+      newRun.disabled = false;
+    } finally {
+      starting = false;
+    }
+  });
+  replayButton.addEventListener("click", () => {
+    if (!replay.hidden) {
+      closeReplay();
+      show("view-title", "双臂最终画面");
+      replayButton.textContent = "播放本轮录像";
+      return;
+    }
+    if (!replay.getAttribute("src")) replay.src = "/legos/replay.mp4";
+    replay.currentTime = 0;
+    replay.hidden = false;
+    frame.hidden = true;
+    layout.classList.add("replaying");
+    show("view-title", "本轮取放录像");
+    replayButton.textContent = "查看最终画面";
+    replay.play().catch(() => {});
+  });
+  async function refreshFrame() {
+    try {
+      const response = await fetch("/legos/frame.jpg", {cache: "no-store"});
+      if (!response.ok) return;
+      const url = URL.createObjectURL(await response.blob());
+      const previous = frameUrl;
+      frame.src = frameUrl = url;
+      if (previous) URL.revokeObjectURL(previous);
+    } catch {
+      // Keep the last frame until the next successful request.
+    } finally {
+      setTimeout(refreshFrame, finished ? 1500 : 85);
+    }
+  }
+  async function refresh() {
+    try {
+      const response = await fetch("/legos/state", {cache: "no-store"});
+      if (!response.ok) return;
+      const state = await response.json();
+      if (currentRun && state.run !== currentRun) {
+        closeReplay();
+        replay.removeAttribute("src");
+        replay.load();
+      }
+      currentRun = state.run;
+      finished = state.phase === "finished";
+      newRun.disabled = starting || !["idle", "finished", "error"].includes(state.phase);
+      replayButton.hidden = !finished;
+      if (replay.hidden) show("view-title", finished ? "双臂最终画面" : "双臂实时画面");
+      const {red = 0, orange = 0, ...other} = state.counts_in_bin || {};
+      const arm = state.arm === "left" ? "左臂 · " : state.arm === "right" ? "右臂 · " : "";
+      show("phase", arm + (labels[state.phase] || "等待开跑"));
+      show("score-title", state.phase === "finished" ? "最终得分" : "当前得分");
+      show("score", state.score || 0);
+      show("red", red);
+      show("orange", orange);
+      show("other", Object.values(other).reduce((a,b) => a+b, 0));
+      const attempts = state.action ? `取放 ${state.action} 次` : "";
+      const moved = state.shifted_neighbors ? ` · 发现 ${state.shifted_neighbors} 块邻砖位移` : "";
+      const cleared = state.separated && Array.isArray(state.drop_pixel)
+        ? ` · 已移到空位 (${state.drop_pixel.join(", ")})` : "";
+      show("result", state.phase === "finished" ? (state.success ? "任务成功 · " : "未达成目标 · ") + attempts
+        : state.phase === "error" ? state.error || "实验中断，请重试。" : attempts + moved + cleared);
+      const modelTime = document.querySelector("#model-time");
+      modelTime.hidden = !Number.isFinite(state.model_seconds);
+      if (!modelTime.hidden) show("model-time", `模型规划 ${state.model_calls} 次 · 共 ${state.model_seconds.toFixed(1)} 秒`);
+      showForce(state);
+      const observation = `${state.run}-${state.observation}`;
+      if (state.observation !== undefined && observation !== lastObservation) {
+        document.querySelector("#top").src = "/legos/top.jpg?v=" + encodeURIComponent(observation);
+        document.querySelector("#wrist-panel").hidden = !state.detail;
+        if (state.detail) document.querySelector("#wrist-detail").src = "/legos/detail.jpg?v=" + encodeURIComponent(observation);
+        lastObservation = observation;
+      }
+      showPose(state);
+    } catch {
+      show("phase", "正在重新连接");
+    } finally {
+      setTimeout(refresh, 300);
+    }
+  }
+  refresh();
+  refreshFrame();
+</script>
+</html>
